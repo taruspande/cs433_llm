@@ -1,0 +1,13 @@
+{
+  "note": "Example design: a d14 model pretrained on a web + math + code mixture, then SFT; FineWeb documents selected by the perplexity of a small d8 scorer. Run: python -m scripts.plan_budget --plan configs/plans/example.json",
+  "models": {
+    "policy": {"depth": 14}
+  },
+  "train": [
+    {"model": "policy", "stage": "pretraining", "tokens": 1.9e9, "note": "web + math + code mixture"},
+    {"model": "policy", "stage": "sft", "steps": 120, "batch_size": 512}
+  ],
+  "data": [
+    {"source": "fineweb, perplexity filter (d8 scorer)", "params": 4e7, "tokens": 3e8}
+  ]
+}

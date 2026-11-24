@@ -1,0 +1,15 @@
+{
+  "comment": "An EXAMPLE of a domain-targeted data recipe (not tuned!). Use with configs/mixtures/example_math_code.json.",
+  "pretrain": {
+    "fineweb": {"registry": "fineweb", "num_shards": 4},
+    "finemath": {"registry": "finemath", "num_shards": 5},
+    "codeparrot": {"registry": "codeparrot", "num_shards": 4}
+  },
+  "sft": {
+    "gsm8k": {"registry": "gsm8k"},
+    "mbpp": {"registry": "mbpp"},
+    "metamathqa": {"registry": "metamathqa"},
+    "tinygsm": {"registry": "tinygsm", "max_docs": 200000},
+    "smoltalk": {"registry": "smoltalk", "max_docs": 23000}
+  }
+}

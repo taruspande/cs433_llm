@@ -1,0 +1,8 @@
+{
+  "comment": "An EXAMPLE of a domain-targeted mixture (not tuned!). Prepare each source first with scripts/prepare_data.py.",
+  "sources": {
+    "fineweb": 0.5,
+    "finemath": 0.3,
+    "codeparrot": 0.2
+  }
+}

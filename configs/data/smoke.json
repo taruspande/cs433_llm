@@ -1,0 +1,12 @@
+{
+  "comment": "Tiny data for the smoke tests (runs/smoke_cpu.sh, runs/smoke_gpu.sh).",
+  "pretrain": {
+    "finemath": {"registry": "finemath", "num_shards": 1, "max_docs": 50000},
+    "codeparrot": {"registry": "codeparrot", "num_shards": 1, "max_docs": 20000}
+  },
+  "sft": {
+    "gsm8k": {"registry": "gsm8k"},
+    "mbpp": {"registry": "mbpp"},
+    "tinygsm": {"registry": "tinygsm", "max_docs": 5000}
+  }
+}

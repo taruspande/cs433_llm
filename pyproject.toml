@@ -1,0 +1,59 @@
+[project]
+name = "cs433-compute-limited-llm"
+version = "0.1.0"
+description = "CS-433 Project 2 (Option A): compute-limited LLM training for math and code, adapted from nanochat"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "filelock>=3.19.0",
+    "kernels>=0.11.7",
+    "numpy>=1.26.0",
+    "psutil>=7.1.0",
+    "pyarrow>=21.0.0",
+    "requests>=2.31.0",
+    "rustbpe>=0.1.0",
+    "tiktoken>=0.11.0",
+    "torch==2.9.1",
+    "wandb>=0.21.3",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+    "matplotlib>=3.10.8",
+]
+
+# target torch to cuda 12.8 or CPU
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu128", extra = "gpu" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[project.optional-dependencies]
+cpu = [
+    "setuptools>=65.0.0",
+    "torch==2.9.1",
+]
+gpu = [
+    "torch==2.9.1",
+]
+
+[tool.uv]
+default-groups = []
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "gpu" },
+    ],
+]

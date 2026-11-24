@@ -1,0 +1,6 @@
+{
+  "comment": "Baseline pretraining mixture: general web text only. Weights are token proportions.",
+  "sources": {
+    "fineweb": 1.0
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "comment": "Data of the baseline. Build with: python -m scripts.prepare_data --config configs/data/baseline.json",
+  "pretrain": {
+    "fineweb": {"registry": "fineweb", "num_shards": 4}
+  },
+  "sft": {
+    "gsm8k": {"registry": "gsm8k"},
+    "mbpp": {"registry": "mbpp"},
+    "tinygsm": {"registry": "tinygsm", "max_docs": 21000},
+    "smoltalk": {"registry": "smoltalk", "max_docs": 46000}
+  }
+}

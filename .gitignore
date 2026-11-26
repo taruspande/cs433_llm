@@ -7,3 +7,13 @@ submission*/
 .env
 .DS_Store
 .pytest_cache/
+
+#prevents virtual environment and temporary files from being uploaded to Git
+M2S1_ML/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+grep -qxF 'M2S1_ML/' .gitignore || echo 'M2S1_ML/' >> .gitignore
+grep -qxF '.venv/' .gitignore || echo '.venv/' >> .gitignore

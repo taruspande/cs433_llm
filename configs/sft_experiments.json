@@ -1,0 +1,33 @@
+
+{
+  "comment": "This document tests different mixtures for the SFT compared to the  baseline of the mixture (gsm8k:4,mbpp:8,tinygsm:1,smoltalk:1) using a common base_model_tag and device_batch_size (which were both used in the baseline.",
+
+  "base_model_tag": "d12_baseline",
+
+  "device_batch_size": 32,
+  "experiments": [
+    {
+      "name": "math_heavy_gms8k",
+      "mixture": "gsm8k:6,mbpp:8,tinygsm:1,smoltalk:1"
+    },
+    
+    {
+      "name": "math_heavy_tinygsm",
+      "mixture": "gsm8k:4,mbpp:8,tinygsm:2,smoltalk:1"
+    },
+
+    {
+      "name": "math_heavy_gms8k_tinygsm",
+      "mixture": "gsm8k:6,mbpp:8,tinygsm:2,smoltalk:1"
+    },
+
+    {
+      "name": "code_heavy",
+      "mixture": "gsm8k:4,mbpp:10,tinygsm:1,smoltalk:1"
+    },
+    {
+      "name": "balanced",
+      "mixture": "gsm8k:4,mbpp:4,tinygsm:2,smoltalk:2"
+    }
+  ]
+}

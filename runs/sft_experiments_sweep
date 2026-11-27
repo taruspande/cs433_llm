@@ -1,0 +1,64 @@
+# BASE IMPORTATIONS #################################################################
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+
+# OUT & INPUT PATHS #################################################################
+ROOT = Path(__file__).resolve().parents[1]
+CONFIG_PATH = ROOT / "configs" / "sft_experiments.json"
+RESULTS_DIR = ROOT / "results"
+
+def run_command(command):
+    print("\nRunning:", " ".join(command), flush=True)
+    subprocess.run(command, cwd=ROOT, check=True)
+
+def main():
+    with open(CONFIG_PATH) as f:
+        config = json.load(f)
+    #check creation
+    RESULTS_DIR.mkdir(exist_ok=True)
+
+    base_tag = config["base_model_tag"]
+    device_batch_size = config["device_batch_size"]
+
+    for experiment in config["experiments"]:
+        name = experiment["name"]
+        mixture = experiment["mixture"]
+
+        output_tag = f"sft_{name}"
+
+        print(f"\n{'=' * 60}")
+        print(f"EXPERIMENT: {name}")
+        print(f"MIXTURE: {mixture}")
+        print(f"{'=' * 60}")
+
+        # SFT with selected experiment ; follows steps of the chat_sft.py file
+        run_command([
+            sys.executable, "-m", "scripts.chat_sft",
+            f"--model-tag={base_tag}",
+            f"--output-tag={output_tag}",
+            f"--mixture={mixture}",
+            f"--device-batch-size={device_batch_size}",
+            "--val-every=0",
+            "--save-every=25",
+            "--run=dummy"
+        ])
+
+        # Save SFT results for given experiment
+        result_file = RESULTS_DIR / f"{name}.json"
+
+        run_command([
+            sys.executable, "-m", "scripts.evaluate",
+            f"--model=sft:{output_tag}",
+            f"--output={result_file}"
+        ])
+
+        print(f"Saved results to {result_file}")
+
+    print("\nAll SFT experiments completed!")
+
+if __name__ == "__main__":
+    main()

@@ -15,5 +15,3 @@ __pycache__/
 *.pyc
 .DS_Store
 
-grep -qxF 'M2S1_ML/' .gitignore || echo 'M2S1_ML/' >> .gitignore
-grep -qxF '.venv/' .gitignore || echo '.venv/' >> .gitignore
